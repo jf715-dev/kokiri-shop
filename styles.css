@@ -1,0 +1,183 @@
+/* ==========================================================================
+   KOKIRI SHOP - STYLES & DESIGN SYSTEM (MINIMALISTA & ESTILIZADO)
+   Soporte nativo para Modo Claro (por defecto) y Modo Oscuro.
+   Líneas limpias, tipografía refinada, sin colores neón ni bordes excesivos.
+   ========================================================================== */
+
+/* Variables CSS para modo claro y oscuro */
+:root {
+  --bg-gradient: linear-gradient(180deg, #e4f0dc 0%, #f4f6f3 260px, #f8f9fa 100%);
+  --bg-page: #f8f9fa;
+  --bg-surface: #ffffff;
+  --bg-surface-elevated: #ffffff;
+  --text-primary: #18181b;
+  --text-secondary: #71717a;
+  --text-muted: #a1a1aa;
+  --border-subtle: #e4e4e7;
+  --border-strong: #d4d4d8;
+  --accent-forest: #1e3a2b;
+  --accent-forest-hover: #294e3a;
+  --color-whatsapp: #25D366;
+  --color-whatsapp-hover: #20bd5a;
+}
+
+html.dark {
+  --bg-gradient: linear-gradient(180deg, #132218 0%, #0d1510 280px, #090c0a 100%);
+  --bg-page: #090c0a;
+  --bg-surface: #111613;
+  --bg-surface-elevated: #161c18;
+  --text-primary: #f4f4f5;
+  --text-secondary: #a1a1aa;
+  --text-muted: #71717a;
+  --border-subtle: #242c26;
+  --border-strong: #323d35;
+  --accent-forest: #3e6b4f;
+  --accent-forest-hover: #4e8563;
+  --color-whatsapp: #25D366;
+  --color-whatsapp-hover: #20bd5a;
+}
+
+/* Base Smooth Scrolling & Font Rendering */
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--bg-gradient);
+  background-attachment: fixed;
+  color: var(--text-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+  transition: background 0.3s ease, color 0.2s ease;
+}
+
+/* Scrollbar oculta para contenedor de categorías */
+.category-scroll {
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.category-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* Scrollbar sutil para modales y carrito */
+.custom-scroll::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+.custom-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+.custom-scroll::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 4px;
+}
+.custom-scroll::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+}
+
+/* Botones de selección de tallas */
+.size-btn {
+  transition: all 0.15s ease;
+  user-select: none;
+}
+
+.size-btn.active {
+  background-color: var(--text-primary) !important;
+  color: var(--bg-surface) !important;
+  border-color: var(--text-primary) !important;
+  font-weight: 600 !important;
+}
+
+/* Transiciones para Drawer de Carrito */
+.drawer-backdrop {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.drawer-backdrop.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.cart-sheet {
+  transform: translateX(100%);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.25s ease;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.cart-sheet.open {
+  transform: translateX(0);
+  visibility: visible;
+  pointer-events: auto;
+}
+
+@media (max-width: 640px) {
+  .cart-sheet {
+    transform: translateY(100%);
+  }
+  .cart-sheet.open {
+    transform: translateY(0);
+  }
+}
+
+/* Transiciones de Modales */
+.modal-wrap {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+  visibility: hidden;
+}
+
+.modal-wrap.open {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  visibility: visible !important;
+}
+
+.modal-dialog {
+  opacity: 0;
+  transform: scale(0.97) translateY(8px);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.modal-wrap.open .modal-dialog {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+/* Toast Notifications */
+.toast-notice {
+  transform: translateY(-120%);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.28s ease;
+}
+
+@media (min-width: 640px) {
+  .toast-notice {
+    transform: translateX(120%);
+  }
+}
+
+.toast-notice.show {
+  transform: translate(0, 0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Botón flotante de WhatsApp */
+.wa-float-btn {
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.wa-float-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
