@@ -502,7 +502,7 @@ const KokiriApp = {
   },
 
   changeModalQty(delta) {
-    this.modalQuantity = Math.max(1, this.modalQuantity + delta);
+    this.modalQuantity = Math.min(10, Math.max(1, this.modalQuantity + delta));
     const qtyEl = document.getElementById("modal-qty");
     if (qtyEl) qtyEl.textContent = this.modalQuantity;
     this.renderModalPrices();
