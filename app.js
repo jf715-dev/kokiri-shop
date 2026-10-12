@@ -292,13 +292,16 @@ const KokiriApp = {
       return `
         <article class="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-lg overflow-hidden flex flex-col group hover:border-zinc-300 dark:hover:border-zinc-700 transition shadow-sm" data-product-id="${product.id}">
           
-          <!-- Imagen del Producto con Aspect Ratio Cuadrado -->
+          <!-- Imagen del Producto con Aspect Ratio Cuadrado y Lazy Loading Suave -->
           <div class="aspect-square relative cursor-pointer overflow-hidden bg-zinc-100 dark:bg-zinc-800/50" onclick="KokiriApp.openQuickView('${product.id}')">
             <img
-              src="${product.image}"
+              src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E"
+              data-src="${product.image}"
               alt="${product.name}"
               loading="lazy"
-              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+              decoding="async"
+              class="kokiri-lazy-img w-full h-full object-cover group-hover:scale-105 transition-all duration-500 opacity-0 filter blur-sm"
+              onload="this.classList.remove('opacity-0', 'blur-sm'); this.classList.add('opacity-100', 'blur-0');"
             />
 
             <!-- Hint sutil para Desktop -->
@@ -374,6 +377,43 @@ const KokiriApp = {
         </article>
       `;
     }).join("");
+
+    this.initLazyImages();
+  },
+
+  initLazyImages() {
+    const lazyImages = document.querySelectorAll(".kokiri-lazy-img[data-src]");
+    if (!lazyImages.length) return;
+
+    if ("IntersectionObserver" in window) {
+      const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const image = entry.target;
+            const src = image.getAttribute("data-src");
+            if (src) {
+              image.src = src;
+              image.removeAttribute("data-src");
+            }
+            observer.unobserve(image);
+          }
+        });
+      }, {
+        rootMargin: "150px 0px 150px 0px", // Precargar suavemente justo antes de entrar al viewport
+        threshold: 0.01
+      });
+
+      lazyImages.forEach(img => imageObserver.observe(img));
+    } else {
+      // Fallback para navegadores antiguos
+      lazyImages.forEach(image => {
+        const src = image.getAttribute("data-src");
+        if (src) {
+          image.src = src;
+          image.removeAttribute("data-src");
+        }
+      });
+    }
   },
 
   selectCardSize(productId, size) {
