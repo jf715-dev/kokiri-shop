@@ -32,15 +32,6 @@
 
 ---
 
-## 📸 Vista Previa
-
-<!-- Puedes subir una captura de pantalla a assets/preview.png para mostrar cómo luce tu tienda -->
-<div align="center">
-  <img src="assets/banner.jpg" alt="Banner Kokiri Shop" width="100%" />
-</div>
-
----
-
 ## ⚙️ Configuración Rápida de la Tienda
 
 Para personalizar los datos comerciales de la tienda, edita el archivo `config.js`:
