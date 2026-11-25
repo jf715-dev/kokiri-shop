@@ -2,7 +2,8 @@
   <img src="assets/logo.png" alt="Kokiri Shop Logo" width="140" />
   <h1>Kokiri Shop 🎮 | Catálogo Gamer E-commerce</h1>
   <p>
-    Catálogo interactivo mobile-first para la venta de camisetas gamer con conversión directa a WhatsApp y cálculo automático de tasa BCV (USD / VES).
+    Kokiri Shop es una marca de ropa urbana y accesorios inspirada en el universo de los videojuegos. Convertimos
+          la nostalgia del pixel, la aventura y el bosque Kokiri en prendas streetwear que se sienten propias.
   </p>
 
   <!-- Botón principal de acceso a la tienda -->
@@ -25,10 +26,9 @@
 
 ## ✨ Características Principales
 
-* **Conversión Directa a WhatsApp:** Botón de compra rápida por prenda (con selección de talla) y carrito lateral consolidado que genera el mensaje listo para enviar.
-* **Multimoneda en Tiempo Real (USD / Bs.):** Consulta automática a la API oficial del Banco Central de Venezuela (`ve.dolarapi.com`) con tasa de respaldo configurable y guardado en `localStorage`.
+* **Compra Directa a través de WhatsApp:** Botón de compra por prenda (con selección de talla) y carrito lateral que genera el mensaje listo para enviar.
+* **Conversión de Divisas (USD / Bs.):** Consulta automática a la API oficial del Banco Central de Venezuela (`ve.dolarapi.com`) con tasa de respaldo configurable y guardado en `localStorage`.
 * **Diseño Mobile-First:** Interfaz optimizada para compras desde redes sociales (Instagram, TikTok, WhatsApp) con paleta de colores inspirada en el universo Kokiri.
-* **Cero Dependencias de Backend:** Arquitectura estática ultrarrápida alojada en GitHub Pages.
 
 ---
 
@@ -38,4 +38,4 @@ Para personalizar los datos comerciales de la tienda, edita el archivo `config.j
 
 ### 1. Número de WhatsApp de Ventas
 ```javascript
-whatsappNumber: "584120000000", // Formato internacional sin '+' ni espacios (Ej: 584121234567)
+whatsappNumber: "584120000000"
